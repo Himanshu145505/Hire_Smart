@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resumes</title>
+    <style>
+/*         Background Styling and Other Upload Options Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://png.pngtree.com/thumb_back/fh260/background/20231001/pngtree-illustration-of-a-3d-rendered-magnifying-glass-symbolizing-the-quest-for-image_13520631.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #2c3e50; /* Fallback color */
+        }
+
+/*         Upload Container */
+/* Container Styling */
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            text-align: center;
+        }
+/*Name Styling  */
+        h1 {
+            font-size: 2.5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+/*Hire Smart Slogan Styling  */
+        .slogan {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #ddd;
+/*         Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+/*Lable Styling  */
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+/*Choose File Styling  */
+        input[type="file"] {
+            margin-bottom: 20px;
+            display: none;
+        }
+/*Upload Button Styling  */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+/*Button Hover Effect  */
+        button:hover {
+            background-color: #45a049;
+        }
+/*File Lable Styling  */
+        .file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .file-label:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        // Form Validation for Selecting atleast 1 Pdf File
+        function validateForm() {
+            // form validation
+            var files = document.getElementById("resumes").files;
+            if (files.length === 0) {
+                // alert message
+                alert("Please select at least one file.");
+                return false;
+            }
+            return true;
+        }
+// Selecting and Selected File Count Function 
+        function updateFileLabel() {
+            
+            var input = document.getElementById("resumes");
+            var label = document.querySelector(".file-label");
+            // Count of No of Files
+            var fileCount = input.files.length;
+
+            if (fileCount === 0) {
+                label.textContent = "Select resumes to upload";
+            } else {
+                label.textContent = fileCount + " file(s) selected";
+            }
+        }
+
+        // Check if the background image loads successfully
+        window.onload = function() {
+            var img = new Image();
+            img.src = 'Cont/Hiring.png';
+            img.onload = function() {
+                document.body.style.backgroundImage = "url('Cont/Hiring.png')";
+            };
+            img.onerror = function() {
+                console.error('Background image failed to load.');
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+<!--         Welcome Message -->
+        <h1>Welcome to HireSmart</h1>
+<!--         Slogan -->
+        <p class="slogan">Streamline your hiring process, save time, and find the best candidates effortlessly!</p>
+        <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+<!--             File Selection Lable -->
+            <label for="resumes" class="file-label">Select resumes to upload</label>
+<!--             Total Selected Files -->
+            <input type="file" name="resumes" id="resumes" class="file-input" multiple onchange="updateFileLabel()">
+<!--             Proceed button -->
+            <button type="submit">Proceed</button>
+        </form>
+    </div>
+</body>
+
+</html>

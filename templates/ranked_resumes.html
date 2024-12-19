@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranked Resumes</title>
+    <style>
+/*         Page Overall Styling, Fonts, Bg Color etc */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50; 
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+/*Container for Display Resume Ranks  */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+/*Job Role Field Styling  */
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+/*Submit Button Styling  */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+        }
+/*Hover Effect  */
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+/*Table Styling  */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+/*Table head and Data Styling  */
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+/*Table head Styling  */
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+/*Hover Effect  */
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<!--         Welcome Message -->
+        <h1>Welcome to HireSmart</h1>
+<!--         Slogan -->
+        <p>Streamline your hiring process, save time, and find the best candidates effortlessly!</p>
+        <form method="post" action="/ranked_resumes">
+<!--             Enter Job Role  -->
+            <label for="job_description">Enter Job Role :</label>
+<!--             Input for Job Role -->
+            <input type="text" name="job_description" id="job_description" required>
+            <input type="submit" value="Rank">
+        </form>
+<!--Reset Uploads Option  -->
+        <form method="post" action="/reset_temp_uploads">
+            <input type="submit" value="Reset Uploads">
+        </form>
+<!--Condition for Displaying the Searched for Job Role Name Message -->
+        {% if job_description %}
+            <p>Showing results for: <strong>{{ job_description }}</strong></p>
+        {% endif %}
+
+<!--         Table Styling -->
+        <table>
+            
+            <thead>
+                <tr>
+<!--                     Table Rows -->
+                    <th>Rank</th>
+                    <th>File</th>
+                    <th>CGPA</th>
+                    <th>Skills Score</th>
+                    <th>Experience Score</th>
+                    <th>Total Score</th>
+                </tr>
+            </thead>
+            <tbody>
+<!--                 Fetch and Display -->
+                {% for index, resume in enumerate(resumes) %}
+                    <tr>
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ resume.file }}</td>
+                        <td>{{ resume.cgpa }}</td>
+                        <td>{{ resume.skills_count }}</td>
+                        <td>{{ resume.exp_count }}</td>
+                        <td>{{ resume.total_score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
