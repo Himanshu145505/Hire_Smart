@@ -64,7 +64,8 @@ python app.py
 
 ---
 
-## 🎥 Working Project Video: https://drive.google.com/file/d/15_juWcguMLVNyb-A2OoV1y5SDtpW4Hll/view?usp=sharing
+
+Working Project Video Link : https://drive.google.com/file/d/15_juWcguMLVNyb-A2OoV1y5SDtpW4Hll/view?usp=sharing
 
 ---
 
